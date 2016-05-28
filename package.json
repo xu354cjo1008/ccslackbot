@@ -5,6 +5,7 @@
   "author": "ChingChang Li <xu354cjo1008@gmail.com>",
   "description": "A simple helpful robot for your Company",
   "dependencies": {
+    "@slack/client": "^3.3.0",
     "hubot": "^2.19.0",
     "hubot-diagnostics": "0.0.1",
     "hubot-google-images": "^0.2.6",
