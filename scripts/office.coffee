@@ -8,6 +8,8 @@
 #
 #   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
+PythonShell = require 'python-shell'
+
 module.exports = (robot) ->
 
  robot.hear /badger/i, (res) ->
@@ -104,3 +106,24 @@ module.exports = (robot) ->
  robot.respond /sleep it off/i, (res) ->
    robot.brain.set 'totalSodas', 0
    res.reply 'zzzzz'
+
+ robot.hear /cpu usage/i, (res) ->
+   spawn = require('child_process').spawn
+   res.reply 'Let me collect data for 10 seconds!'
+   child = spawn './scripts/test_script.py'
+   child.stdout.on 'data', (data) ->
+     res.reply data
+   child.stdout.on 'end', (data) ->
+     res.reply 'finish'
+
+ thankReplies = ['You\'re welcome', 'You are welcome', 'That\'s my job', 'It\'s my pleasure']
+
+ robot.respond /thank/i, (res) ->
+     res.reply res.random thankReplies
+
+ robot.respond /hi/i, (res) ->
+     res.reply res.random enterReplies
+ robot.respond /fuck/i, (res) ->
+     res.reply 'Why you fuck me'
+ robot.respond /sorry/i, (res) ->
+     res.reply 'Don\'t mind'
